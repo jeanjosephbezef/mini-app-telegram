@@ -1,66 +1,108 @@
-from dotenv import load_dotenv
 import os
+
+from dotenv import load_dotenv
 
 load_dotenv()
 
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from telegram import (
+    Update,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    WebAppInfo
+)
 
-# Token du bot
+from telegram.ext import (
+    ApplicationBuilder,
+    CommandHandler,
+    ContextTypes
+)
+
+
+# Token Telegram
 TOKEN = os.getenv("TELEGRAM_TOKEN")
 
-# URL HTTPS de ta Mini App
+
+# URL de ta Mini App Render
 WEB_APP_URL = "https://mini-app-telegram-04nu.onrender.com"
 
-# Administrateurs du bot (ID Telegram)
+
+# Administrateurs
 ADMIN_IDS = [
-    8906241208,  # ton ID
-    8702997904   # ID du deuxième administrateur
+    8906241208,
+    8702997904
 ]
 
-async def admin_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user_id = update.effective_user.id
 
-    if user_id not in ADMIN_IDS:
-        await update.message.reply_text("❌ Tu n'es pas administrateur.")
-        return
-
-    await update.message.reply_text("✅ Bienvenue dans le panneau admin.")
-
+# -------------------------
+# COMMANDES
+# -------------------------
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    keyboard = [[
-        InlineKeyboardButton(
-            text="🚀 Ouvrir l'application",
-            web_app=WebAppInfo(url=WEB_APP_URL)
-        )
-    ]]
+
+    keyboard = [
+        [
+            InlineKeyboardButton(
+                text="🚀 Ouvrir la boutique",
+                web_app=WebAppInfo(url=WEB_APP_URL)
+            )
+        ]
+    ]
 
     await update.message.reply_text(
-        text="Bienvenue ! Clique sur le bouton ci-dessous pour ouvrir l'application.",
+        "Bienvenue 👋\n\n"
+        "Clique sur le bouton pour accéder à la boutique :",
         reply_markup=InlineKeyboardMarkup(keyboard)
     )
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+
     await update.message.reply_text(
-        "/start - Ouvrir la Mini App\n"
-        "/help - Afficher l'aide"
+        "Commandes disponibles :\n"
+        "/start - Ouvrir la boutique\n"
+        "/help - Aide\n"
+        "/admin - Administration"
     )
 
 
+async def admin_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+
+    user_id = update.effective_user.id
+
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text(
+            "❌ Accès refusé."
+        )
+        return
+
+    await update.message.reply_text(
+        "✅ Bienvenue dans le panneau administrateur."
+    )
+
+
+# -------------------------
+# DEMARRAGE BOT
+# -------------------------
+
 def main():
+
     if not TOKEN:
         raise ValueError(
-            "La variable d'environnement TELEGRAM_TOKEN n'est pas définie."
+            "TELEGRAM_TOKEN manquant dans les variables d'environnement"
         )
+
 
     app = ApplicationBuilder().token(TOKEN).build()
 
+
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("help", help_command))
+    app.add_handler(CommandHandler("admin", admin_command))
 
-    print("Bot démarré...")
+
+    print("Bot Telegram démarré ✅")
+
+
     app.run_polling()
 
 
