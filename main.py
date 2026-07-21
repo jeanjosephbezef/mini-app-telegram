@@ -5,6 +5,7 @@ load_dotenv()
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
+from models import Produit
 
 # Token Telegram récupéré depuis une variable d'environnement
 TOKEN = os.getenv("TELEGRAM_TOKEN")
