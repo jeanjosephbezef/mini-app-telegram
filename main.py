@@ -59,8 +59,7 @@ def main():
     app.add_handler(CommandHandler("admin", admin_command))
 
     print("Bot démarré...")
-    app.run_polling()
-
+  
 
 if __name__ == "__main__":
     main()
