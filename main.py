@@ -2,15 +2,30 @@ import os
 
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
-
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 
 # Token Telegram récupéré depuis une variable d'environnement
 TOKEN = os.getenv("TELEGRAM_TOKEN")
 
+WEB_APP_URL = "https://mini-app-telegram-04nu.onrender.com"
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+
+async def start(update, context):
+
+    keyboard = [
+        [
+            InlineKeyboardButton(
+                "🚀 Ouvrir la Mini App",
+                web_app=WebAppInfo(url=WEB_APP_URL)
+            )
+        ]
+    ]
+
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
     await update.message.reply_text(
-        "Bienvenue sur le bot !"
+        "Bienvenue 👋",
+        reply_markup=reply_markup
     )
 
 
