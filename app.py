@@ -5,6 +5,19 @@ import asyncio
 from flask import Flask, send_from_directory
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from telegram import Update
+from flask import Flask, send_from_directory
+
+app = Flask(__name__, static_folder="webapp")
+
+
+@app.route("/")
+def home():
+    return send_from_directory("webapp", "index.html")
+
+
+@app.route("/<path:path>")
+def static_files(path):
+    return send_from_directory("webapp", path)
 
 
 # Token Telegram depuis Render Environment
