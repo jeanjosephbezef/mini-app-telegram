@@ -1,9 +1,9 @@
 import os
 import threading
+import asyncio
 
 from flask import Flask, send_from_directory
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from telegram.ext import ApplicationBuilder, CommandHandler
 
 
 TOKEN = os.getenv("TELEGRAM_TOKEN")
@@ -21,29 +21,22 @@ def static_files(path):
     return send_from_directory("webapp", path)
 
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Bienvenue sur le bot !")
+async def start(update, context):
+    await update.message.reply_text("Bot actif ✅")
 
 
-async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
-        "Commandes disponibles :\n/start\n/help\n/admin"
-    )
-
-
-async def admin_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Commande administrateur")
+async def help_command(update, context):
+    await update.message.reply_text("/start\n/help")
 
 
 def run_bot():
-    import asyncio
 
-    async def main():
+    async def bot_main():
+
         bot = ApplicationBuilder().token(TOKEN).build()
 
         bot.add_handler(CommandHandler("start", start))
         bot.add_handler(CommandHandler("help", help_command))
-        bot.add_handler(CommandHandler("admin", admin_command))
 
         await bot.initialize()
         await bot.start()
@@ -51,11 +44,11 @@ def run_bot():
 
         await asyncio.Event().wait()
 
-    asyncio.run(main())
+    asyncio.run(bot_main())
 
 
-if __name__ != "__main__":
-    threading.Thread(target=run_bot).start()
+# Lance le bot une seule fois
+threading.Thread(target=run_bot).start()
 
 
 if __name__ == "__main__":
