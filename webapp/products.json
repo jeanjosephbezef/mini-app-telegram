@@ -2,7 +2,7 @@
   {
     "id": 1,
     "nom": "Amnesia CBD",
-    "categorie": "Fleurs",
+    "categorie": "Weed",
     "prix": 7.50,
     "image": "images/amnesia.jpg",
     "description": "Fleurs de CBD cultivées en serre."
@@ -10,7 +10,7 @@
   {
     "id": 2,
     "nom": "Gelato CBD",
-    "categorie": "Fleurs",
+    "categorie": "Weed",
     "prix": 8.50,
     "image": "images/gelato.jpg",
     "description": "Fleurs de CBD."
