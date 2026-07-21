@@ -7,7 +7,7 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppI
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
 # Token du bot
-TOKEN = os.getenv("8956683379:AAGFOuzE3X6Qxi9VVlp_vbi7OlQAHaaDnz8")
+TOKEN = os.getenv("TELEGRAM_TOKEN")
 
 # URL HTTPS de ta Mini App
 WEB_APP_URL = "https://ton-application.onrender.com"
