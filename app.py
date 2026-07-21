@@ -1,19 +1,24 @@
 import os
 import threading
 
-from flask import Flask
+from flask import Flask, send_from_directory
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
 
 TOKEN = os.getenv("TELEGRAM_TOKEN")
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="webapp")
 
 
 @app.route("/")
 def home():
-    return "Bot Telegram actif"
+    return send_from_directory("webapp", "index.html")
+
+
+@app.route("/<path:path>")
+def static_files(path):
+    return send_from_directory("webapp", path)
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -48,5 +53,13 @@ def run_bot():
 
     asyncio.run(main())
 
+
 if __name__ != "__main__":
     threading.Thread(target=run_bot).start()
+
+
+if __name__ == "__main__":
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000))
+    )
