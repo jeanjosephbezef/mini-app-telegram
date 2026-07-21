@@ -31,14 +31,22 @@ async def admin_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 def run_bot():
-    bot = ApplicationBuilder().token(TOKEN).build()
+    import asyncio
 
-    bot.add_handler(CommandHandler("start", start))
-    bot.add_handler(CommandHandler("help", help_command))
-    bot.add_handler(CommandHandler("admin", admin_command))
+    async def main():
+        bot = ApplicationBuilder().token(TOKEN).build()
 
-    bot.run_polling()
+        bot.add_handler(CommandHandler("start", start))
+        bot.add_handler(CommandHandler("help", help_command))
+        bot.add_handler(CommandHandler("admin", admin_command))
 
+        await bot.initialize()
+        await bot.start()
+        await bot.updater.start_polling()
+
+        await asyncio.Event().wait()
+
+    asyncio.run(main())
 
 if __name__ != "__main__":
     threading.Thread(target=run_bot).start()
