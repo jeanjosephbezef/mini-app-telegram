@@ -1,4 +1,5 @@
 from flask import Flask, send_from_directory
+import os
 
 app = Flask(__name__, static_folder="webapp")
 
@@ -11,4 +12,4 @@ def static_proxy(path):
     return send_from_directory("webapp", path)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
