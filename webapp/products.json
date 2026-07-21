@@ -1,44 +1,50 @@
 [
-    {
-      "nom": "Fleur CBD Premium",
-      "categorie": "Fleurs",
-      "prix": 12.90,
-      "image": "fleur.jpg",
-      "description": "Fleur CBD sélection premium, arômes puissants et sélectionnée avec soin."
-    },
-    {
-      "nom": "Fleur CBD Indoor",
-      "categorie": "Fleurs",
-      "prix": 9.90,
-      "image": "fleur.jpg",
-      "description": "Culture indoor, qualité régulière et saveurs équilibrées."
-    },
-    {
-      "nom": "Huile CBD 10%",
-      "categorie": "Huiles",
-      "prix": 29.90,
-      "image": "huile.jpg",
-      "description": "Huile CBD bien-être au dosage 10%."
-    },
-    {
-      "nom": "Huile CBD 20%",
-      "categorie": "Huiles",
-      "prix": 49.90,
-      "image": "huile.jpg",
-      "description": "Formule concentrée premium."
-    },
-    {
-      "nom": "Collection Premium",
-      "categorie": "Premium",
-      "prix": 59.90,
-      "image": "premium.jpg",
-      "description": "Sélection haut de gamme LE FILON 74."
-    },
-    {
-      "nom": "Coffret Découverte",
-      "categorie": "Coffrets",
-      "prix": 39.90,
-      "image": "coffret.jpg",
-      "description": "Coffret découverte bien-être."
-    }
-  ]
+  {
+    "id": 1,
+    "nom": "Amnesia CBD",
+    "categorie": "Fleurs",
+    "prix": 7.50,
+    "image": "images/amnesia.jpg",
+    "description": "Fleurs de CBD cultivées en serre."
+  },
+  {
+    "id": 2,
+    "nom": "Gelato CBD",
+    "categorie": "Fleurs",
+    "prix": 8.50,
+    "image": "images/gelato.jpg",
+    "description": "Fleurs de CBD."
+  },
+  {
+    "id": 3,
+    "nom": "Frozen Hash CBD",
+    "categorie": "Hash",
+    "prix": 10.90,
+    "image": "images/frozen-hash.jpg",
+    "description": "Hash CBD."
+  },
+  {
+    "id": 4,
+    "nom": "Dry Sift CBD",
+    "categorie": "Hash",
+    "prix": 9.90,
+    "image": "images/dry-sift.jpg",
+    "description": "Hash CBD."
+  },
+  {
+    "id": 5,
+    "nom": "Pack Festif",
+    "categorie": "Festif",
+    "prix": 19.90,
+    "image": "images/pack-festif.jpg",
+    "description": "Sélection d'accessoires pour vos événements."
+  },
+  {
+    "id": 6,
+    "nom": "Boîte Cadeau",
+    "categorie": "Festif",
+    "prix": 24.90,
+    "image": "images/coffret.jpg",
+    "description": "Coffret cadeau prêt à offrir."
+  }
+]

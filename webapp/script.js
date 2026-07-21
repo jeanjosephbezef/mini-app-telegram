@@ -1,52 +1,76 @@
-let tousLesProduits = [];
+let products = [];
 let panier = [];
 
 
-async function chargerProduits(){
+// Charger les produits
+fetch("products.json")
+    .then(response => response.json())
+    .then(data => {
 
-    const reponse = await fetch("products.json");
+        products = data;
 
-    tousLesProduits = await reponse.json();
+        afficherProduits(products);
 
-    afficherProduits(tousLesProduits);
+    })
+    .catch(error => {
 
-}
+        console.error(
+            "Erreur chargement produits :",
+            error
+        );
 
-function afficherProduits(produits){
-
-    const zone = document.getElementById("products");
-
-    zone.innerHTML = "";
-
-
-    produits.forEach(produit => {
+    });
 
 
-        zone.innerHTML += `
 
-        <div class="card">
+// Afficher les produits
+function afficherProduits(liste) {
 
-            <img src="images/${produit.image}">
+    const container = document.getElementById("products");
 
-            <div class="infos">
+    container.innerHTML = "";
 
-                <h3>${produit.nom}</h3>
 
-                <p>${produit.description}</p>
+    liste.forEach(product => {
 
-                <strong>
-                ${produit.prix.toFixed(2)} €
-                </strong>
 
-                <button onclick='ajouter(${JSON.stringify(produit)})'>
-                Ajouter 🛒
+        const card = document.createElement("div");
+
+        card.className = "product";
+
+
+        card.innerHTML = `
+
+            <img src="${product.image}" 
+            alt="${product.nom}">
+
+
+            <div class="product-info">
+
+                <h3>${product.nom}</h3>
+
+                <p>${product.description}</p>
+
+                <div class="price">
+                    ${product.prix.toFixed(2)} €
+                </div>
+
+
+                <button 
+                class="add-btn"
+                onclick="ajouterPanier(${product.id})">
+
+                    Ajouter au panier
+
                 </button>
 
             </div>
 
-        </div>
-
         `;
+
+
+        container.appendChild(card);
+
 
     });
 
@@ -54,106 +78,167 @@ function afficherProduits(produits){
 
 
 
-function ajouter(produit){
-
-    panier.push(produit);
-
-    afficherCompteur();
-
-}
-
-
-
-function afficherCompteur(){
-
-    document.getElementById("count").innerHTML = panier.length;
-
-}
-
-
-
-function ouvrirPanier(){
-
-    document.getElementById("cart").style.display="block";
-
-    afficherPanier();
-
-}
-
-
-
-function fermerPanier(){
-
-    document.getElementById("cart").style.display="none";
-
-}
-
-
-
-function afficherPanier(){
-
-    let zone=document.getElementById("cartItems");
-
-    zone.innerHTML="";
-
-
-    let total=0;
-
-
-    panier.forEach((p,index)=>{
-
-
-        total += p.prix;
-
-
-        zone.innerHTML += `
-
-        <div class="cartLine">
-
-        ${p.nom}
-
-        ${p.prix} €
-
-        <button onclick="supprimer(${index})">
-        ❌
-        </button>
-
-        </div>
-
-        `;
-
-
-    });
-
-
-    document.getElementById("total").innerHTML =
-    total.toFixed(2);
-
-}
-
-
-
-function supprimer(index){
-
-    panier.splice(index,1);
-
-    afficherCompteur();
-
-    afficherPanier();
-
-}
-
-
-
-chargerProduits(); 
-
+// Filtrer par catégorie
 function filtrerCategorie(categorie){
 
-    let produitsFiltres = tousLesProduits.filter(
-        produit => produit.categorie === categorie
+
+    if(categorie === "Tous"){
+
+        afficherProduits(products);
+
+        return;
+
+    }
+
+
+    const resultat = products.filter(product =>
+
+        product.categorie === categorie
+
     );
 
 
-    afficherProduits(produitsFiltres);
+    afficherProduits(resultat);
+
+
+}
+
+
+
+// Recherche produit
+function rechercherProduit(){
+
+
+    const recherche = document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+
+
+    const resultat = products.filter(product =>
+
+        product.nom
+        .toLowerCase()
+        .includes(recherche)
+
+    );
+
+
+    afficherProduits(resultat);
+
+
+}
+
+
+
+
+// Ajouter au panier
+function ajouterPanier(id){
+
+
+    const produit = products.find(p => p.id === id);
+
+
+    panier.push(produit);
+
+
+    mettreAJourPanier();
+
+
+}
+
+
+
+// Ouvrir panier
+function ouvrirPanier(){
+
+    document
+    .getElementById("cart")
+    .classList
+    .add("active");
+
+}
+
+
+
+// Fermer panier
+function fermerPanier(){
+
+    document
+    .getElementById("cart")
+    .classList
+    .remove("active");
+
+}
+
+
+
+// Mise à jour panier
+function mettreAJourPanier(){
+
+
+    const items =
+    document.getElementById("cartItems");
+
+
+    const total =
+    document.getElementById("total");
+
+
+    const count =
+    document.getElementById("count");
+
+
+
+    items.innerHTML="";
+
+
+    let somme = 0;
+
+
+
+    panier.forEach((item,index)=>{
+
+
+        somme += item.prix;
+
+
+        const div =
+        document.createElement("div");
+
+
+        div.className="cart-item";
+
+
+        div.innerHTML=`
+
+            <span>
+                ${item.nom}
+            </span>
+
+
+            <span>
+                ${item.prix.toFixed(2)} €
+            </span>
+
+        `;
+
+
+        items.appendChild(div);
+
+
+    });
+
+
+
+    total.innerText =
+    somme.toFixed(2);
+
+
+
+    count.innerText =
+    panier.length;
+
 
 }
