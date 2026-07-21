@@ -10,7 +10,22 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 TOKEN = os.getenv("TELEGRAM_TOKEN")
 
 # URL HTTPS de ta Mini App
-WEB_APP_URL = "https://ton-application.onrender.com"
+WEB_APP_URL = "https://mini-app-telegram-04nu.onrender.com"
+
+# Administrateurs du bot (ID Telegram)
+ADMIN_IDS = [
+    8906241208,  # ton ID
+    8702997904   # ID du deuxième administrateur
+]
+
+async def admin_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+
+    if user_id not in ADMIN_IDS:
+        await update.message.reply_text("❌ Tu n'es pas administrateur.")
+        return
+
+    await update.message.reply_text("✅ Bienvenue dans le panneau admin.")
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
