@@ -1,0 +1,221 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background:
+        linear-gradient(
+            rgba(0,0,0,0.55),
+            rgba(0,0,0,0.75)
+        ),
+        url("images/background.jpg");
+
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    color: white;
+}
+
+
+.app {
+    max-width: 450px;
+    margin: auto;
+    padding: 20px;
+}
+
+
+/* HEADER */
+
+header {
+    text-align: center;
+    padding: 25px;
+
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(15px);
+
+    border-radius: 25px;
+    margin-bottom: 25px;
+}
+
+
+header h1 {
+    font-size: 32px;
+    margin: 0;
+
+    color:#f8d58a;
+}
+
+
+header p {
+    margin-top:10px;
+    opacity:0.8;
+}
+
+
+
+/* CATEGORIES */
+
+.categories {
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+
+}
+
+
+.category {
+
+    height:110px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    font-size:40px;
+
+    background:rgba(255,255,255,0.15);
+
+    backdrop-filter:blur(12px);
+
+    border-radius:25px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+
+.category span {
+
+    font-size:16px;
+    margin-top:8px;
+
+}
+
+
+
+.category:hover {
+
+    transform:translateY(-5px);
+
+    background:rgba(255,255,255,0.25);
+
+}
+
+
+
+/* PRODUITS */
+
+h2 {
+
+    margin-top:30px;
+
+}
+
+
+#products {
+
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+
+}
+
+
+
+/* MENU BAS */
+
+nav {
+
+    position:fixed;
+
+    bottom:20px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:90%;
+
+    max-width:400px;
+
+    display:flex;
+
+    justify-content:space-around;
+
+
+    padding:15px;
+
+
+    background:rgba(255,255,255,0.15);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:30px;
+
+    font-size:25px;
+
+}
+#count {
+
+    background:#f8d58a;
+    
+    color:black;
+    
+    border-radius:50%;
+    
+    padding:3px 8px;
+    
+    font-size:14px;
+    
+    }
+    
+    
+    
+    .cart {
+    
+    display:none;
+    
+    position:fixed;
+    
+    top:20px;
+    
+    left:5%;
+    
+    width:90%;
+    
+    height:80%;
+    
+    background:#1b1b1b;
+    
+    border-radius:30px;
+    
+    padding:25px;
+    
+    z-index:10;
+    
+    overflow:auto;
+    
+    }
+    
+    
+    
+    .cartLine {
+    
+    background:rgba(255,255,255,.1);
+    
+    padding:15px;
+    
+    border-radius:15px;
+    
+    margin:10px 0;
+    
+    display:flex;
+    
+    justify-content:space-between;
+    
+    }

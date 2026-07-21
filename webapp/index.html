@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LE FILON 74</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<header>
+
+<h1>LE FILON 74</h1>
+
+<p>Discret • Rapide • Sécurité • Qualité </p>
+
+</header>
+
+
+
+<section class="categories">
+
+    <div class="category" onclick="filtrerCategorie('Fleurs')">
+    🌿
+    <span>Fleurs CBD</span>
+    </div>
+    
+    
+    <div class="category" onclick="filtrerCategorie('Huiles')">
+    🧴
+    <span>Huiles</span>
+    </div>
+    
+    
+    <div class="category" onclick="filtrerCategorie('Premium')">
+    💎
+    <span>Premium</span>
+    </div>
+    
+    
+    <div class="category" onclick="filtrerCategorie('Coffrets')">
+    🎁
+    <span>Coffrets</span>
+    </div>
+    
+    </section>
+
+
+
+<h2>Nos créations</h2>
+
+
+<div id="products"></div>
+
+
+
+<nav>
+
+    <div onclick="location.reload()">
+    🏠
+    </div>
+    
+    <div>
+    📂
+    </div>
+    
+    <div onclick="ouvrirPanier()">
+    🛒
+    <span id="count">0</span>
+    </div>
+    
+    <div>
+    👤
+    </div>
+    
+    </nav>
+    
+    
+    <div id="cart" class="cart">
+    
+    <h2>Votre panier</h2>
+    
+    <div id="cartItems"></div>
+    
+    <h3>
+    Total : <span id="total">0</span> €
+    </h3>
+    
+    <button onclick="fermerPanier()">
+    Continuer mes achats
+    </button>
+    
+    </div>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
